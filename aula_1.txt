@@ -1,0 +1,3 @@
+VAR é género de variável global
+LET É declarar variáveis de forma normal, mas são a nivéis de bloco
+CONST é declarar constantes
