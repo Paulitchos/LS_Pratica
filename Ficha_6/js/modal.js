@@ -1,5 +1,6 @@
 'use strict';
 
+
 /*-------------------------
 listener para fechar as janelas modais
 -------------------------*/
@@ -8,11 +9,6 @@ const modalWindows = document.querySelectorAll('.w3-modal');
 const modalTop10 = document.querySelector('#modal-top10');
 const modalGameOver = document.querySelector('#modal-gameOver');
 
-const showModalGameOver = (msg) => {
-     modalGameOver.style.display = 'block';
-     document.querySelector('#messageGameOver').textContent = msg;
-     //  panelGame.classList.add('no-events')
-}
 
 
 function closeModal(element) {

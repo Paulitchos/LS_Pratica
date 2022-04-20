@@ -20,6 +20,8 @@ const labelPoints = document.getElementById('points');
 let totalPoints;
 const messageGameOver = document.getElementById('messageGameOver');
 
+let topGamers = [ {nickname: 'Ze', points: 331 }, {nickname: 'Maria' , points: 50 }];
+
 // Algoritmo Fisher-Yates -  Algoritmo que baralha um array.
 const shuffleArray = array => {
     for (let i = array.length - 1; i > 0; i--) {
@@ -78,6 +80,7 @@ const createAndShuffleCards = array => {
 }
 
 function startGame() {
+    getTopPoints();
     btPlay.textContent = 'Terminar Jogo';
     let [indice, newCardLogos] = [0, [...cardsLogos]];
     timer = TIMEOUTGAME;
@@ -99,6 +102,7 @@ function stopGame() {
     btPlay.textContent = 'Iniciar Jogo';
     clearInterval(timerID);
     messageGameOver.textContent = totalPoints;
+    checkTop10(totalPoints);
 }
 
 function reset() {
@@ -137,6 +141,74 @@ function updatePoints(operacaoSoma = true) {
 
 }
 
+function getTop10(){
+    let infoTop = document.getElementById('infoTop');
+    let arrayTop10 = "";
+
+   /* for (let i = 0; i < topGamers.length; i++) {
+        arrayTop10 += `${topGamers[i].nickname} - ${topGamers[i].points}<br>` ;
+        console.log(arrayTop10);
+    }
+
+    infoTop.innerHTML = arrayTop10;*/
+
+    infoTop.innerHTML = "";
+
+    let div = document.createElement('div'); 
+    let p1 = document.createElement('p'); 
+    p1.textContent = 'Nick Name'; 
+    let p2 = document.createElement('p'); 
+    p2.textContent = 'Pontuação'; 
+    div.appendChild(p1);
+    div.appendChild(p2);
+     
+    for (let i = 0; i < topGamers.length; i++) {     
+        infoTop.appendChild(div.cloneNode(true));  
+        div.firstChild.textContent = `${topGamers[i].nickname}`;
+        div.lastChild.textContent = `${topGamers[i].points}`;
+    }
+    
+    infoTop.appendChild(div);
+    
+}
+
+function getTopPoints(){
+let pointsTop = document.getElementById('pointsTop');
+pointsTop.innerHTML= `${topGamers[0].points}`;
+}
+
+function getLastPoints(){
+    let index_do_ultimo = topGamers.length;
+    let lastpoints=0;
+
+    lastpoints = topGamers[index_do_ultimo-1].points;
+
+    console.log(`${topGamers[index_do_ultimo-1].points}`);
+
+    return lastpoints;
+}
+
+function checkTop10(totalPoints){
+    let lastpoints = getLastPoints();
+    let nick = document.getElementById('nickname');
+
+    if(topGamers.length < 10 || totalPoints > lastpoints){
+        nick.style.display = 'block';
+        messageGameOver.innerHTML += "<br>Parabéns! Entrou no Top 10";
+    }
+
+}
+
+function saveTop10(){
+    let inputNick = document.getElementById('inputNick');
+    let nicknames = topGamers.map(({ nickname }) => nickname);
+
+    if(nicknames.includes(`${inputNick}`) == true){
+        if(topGamers(`§{}`))
+    }
+
+}
+
 
 // --------------------------------------------------------
 // Event Listeners
@@ -154,6 +226,10 @@ const createEventListenerFlipCard = (c) => {
         flipCard(this);
     }, { once: true });
 }
+
+btTop.addEventListener('click', function () {
+    getTop10();
+});
 
 const backupCards = [...cards];
 function createPanelGame() {
