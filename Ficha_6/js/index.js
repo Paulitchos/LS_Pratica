@@ -36,6 +36,11 @@ const shuffleArray = array => {
 // Funções Jogo memória
 // ------------------------
 
+(function getLocalStorage(){
+    localStorage.getItem('nickname');
+    localStorage.getItem(topGamers);
+})();
+
 function flipCard(selectedCard) {
     selectedCard.classList.add('flipped');
     flippedCards.push(selectedCard);
@@ -200,14 +205,35 @@ function checkTop10(totalPoints){
 }
 
 function saveTop10(){
-    let inputNick = document.getElementById('inputNick');
-    let nicknames = topGamers.map(({ nickname }) => nickname);
+    let inputNick = document.getElementById('inputNick').value;
+    localStorage.setItem('Nickname', inputNick);
 
-    if(nicknames.includes(`${inputNick}`) == true){
-        if(topGamers(`§{}`))
+    const novosPontos = {nickname: inputNick, points: totalPoints};
+    const dimTopGamers = topGamers.length;
+    
+    let userExists = false;
+    topGamers.forEach((gamer,index) =>{
+        if(gamer.nickname === inputNick){
+            userExists = true;
+            topGamers[index].points = totalPoints;
+        }
+    
+    })
+
+    if(userExists === false){
+        topGamers.push(novosPontos);
     }
 
+    topGamers.sort(function (a, b) { return b.points - a.points });
+
+    if(dimTopGamers > 10){
+        topGamers.pop();
+    }
+
+    localStorage.setItem(topGamers, JSON.stringify({nickname:nickname, points: totalPoints}));
+
 }
+
 
 
 // --------------------------------------------------------
@@ -229,6 +255,12 @@ const createEventListenerFlipCard = (c) => {
 
 btTop.addEventListener('click', function () {
     getTop10();
+});
+
+okTop.addEventListener('click', function(){
+    saveTop10();
+    modalGameOver.style.display = "none";
+    reset();
 });
 
 const backupCards = [...cards];
