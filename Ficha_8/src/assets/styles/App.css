@@ -1,0 +1,70 @@
+/**********************************************
+*** © Linguagens Script > DEIS > ISEC > IPC 
+*** Jogo de Memória em React
+*** Estilos App.js 
+**********************************************/
+#container {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0 10px 0;
+  padding: 15px 20px 10px 20px;
+  background-color: #fff;
+  color: grey;
+  box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.3);
+  align-items: center;
+  width: 500px;
+  min-width: 450px;
+  border-radius: 10px;
+}
+.main-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+}
+#container > header {
+  font-size: 1.2em;
+  text-align: center;
+  letter-spacing: 2px;
+  line-height: 1.5em;
+  color: var(--globalColor);
+}
+footer {
+  font-size: xx-small;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+.title,
+.subtitle {
+  font-family: inherit;
+  font-size: 1.2rem;
+  text-align: center;
+  letter-spacing: 2px;
+  line-height: 1.5em;
+  color: var(--globalColor);
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+.title {
+  font-weight: bolder;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  font-style: italic;
+}
+
+.sr-only {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: auto;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  position: absolute !important;
+  width: 1px;
+  white-space: nowrap;
+}
