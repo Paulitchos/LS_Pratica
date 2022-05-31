@@ -15,36 +15,10 @@ import {
 
 
 function App() {
-  let numOfCards = 0;
-  let doubledCardsObjects=[];
+
   const [gameStarted, setGameStarted] = useState(false);
   const [selectedLevel, setSelectedLevel] = useState("0");
   const [cards, setCards] = useState([]);
-  const initialCards = shuffleArray(CARDS_LOGOS);
-  const slicedInitialCards = initialCards.slice(0, numOfCards);
-
-
-  slicedInitialCards.forEach((card, index) => {
-    doubledCardsObjects.push({
-      key: `${card}-${index}`,
-      id: card,
-      name: card
-    });
-
-    doubledCardsObjects.push({
-      key: `${card}-${index}-clone`,
-      id: `${card}-clone`,
-      name: card
-      });
-    
-    setCards(`${doubledCardsObjects}`);
-
-  });
-
-  console.log(doubledCardsObjects);
-
- 
-  
 
   const handleGameStart = () => {
     if (gameStarted) {
@@ -59,28 +33,48 @@ function App() {
   const handleLevelChange = (event) => {
     const { value } = event.currentTarget;
     setSelectedLevel(value);
-    console.log(value);
-    switch (value) {
-      case "0":
-        numOfCards = 0;
-        break;
 
+    let numOfCards;
+    switch (value) {
+      // Level: Beginner
       case "1":
         numOfCards = 3;
         break;
-
+      // Level: Intermediate
       case "2":
         numOfCards = 6;
         break;
-
+      // Level: Advanced
       case "3":
         numOfCards = 10;
         break;
-
       default:
+        numOfCards = 0;
+        break;
     }
-    console.log(numOfCards);
-  };;
+    const initialCards = shuffleArray(CARDS_LOGOS);
+    const slicedInitialCards = initialCards.slice(0, numOfCards);
+
+    // array com 2 imagens de cada tipo
+    const doubledCardsObjects = [];
+
+    slicedInitialCards.forEach((card, index) => {
+      doubledCardsObjects.push({
+        key: `${card}-${index}`,
+        id: card,
+        name: card,
+      });
+
+      doubledCardsObjects.push({
+        key: `${card}-${index}-clone`,
+        id: `${card}-clone`,
+        name: card,
+      });
+    });
+
+    const doubledShuffledCardsObjects = shuffleArray(doubledCardsObjects);
+    setCards([...doubledShuffledCardsObjects]);
+  };
 
   
 
