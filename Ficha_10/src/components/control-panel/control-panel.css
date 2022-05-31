@@ -1,0 +1,153 @@
+/**********************************************
+*** © Linguagens Script > DEIS > ISEC > IPC 
+*** Jogo de Memória em React
+*** Estilos para control-panel.component.jsx 
+**********************************************/
+#panel-control {
+  background-color: #f1f0f0;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.8);
+  border-radius: 10px;
+  font-size: smaller;
+  color: grey;
+  width: 100%;
+  margin: 15px 0px;
+  border: 3px solid var(--globalColor);
+}
+
+#panel-control .form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+}
+
+#panel-control .form,
+#panel-control .form-metadata {
+  width: 100%;
+  padding: 10px 20px;
+}
+
+#panel-control .form-metadata {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 5px;
+  width: 100%;
+}
+
+#panel-control .list-item.gameStarted {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2px;
+}
+#panel-control .list-item:not(.gameStarted) {
+  display: none;
+}
+
+#message.hide {
+  display: none;
+}
+
+#panel-control .left {
+  justify-self: left;
+}
+
+#panel-control .right {
+  justify-self: end;
+}
+
+#panel-control .form-group {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  justify-self: left;
+}
+
+#panel-control .form-info {
+  display: grid;
+  grid-template-columns: auto auto;
+  width: 100%;
+  list-style-type: none;
+}
+
+#panel-control #message {
+  color: var(--messageColor);
+  font-weight: bolder;
+}
+
+#game {
+  width: 80%;
+  min-width: 200px;
+  margin: 0 auto;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  grid-template-columns: auto auto auto;
+  gap: 10px;
+  display: grid;
+  justify-content: center;
+  perspective: 1000px;
+  user-select: none;
+}
+
+#game.avancado {
+  width: 80%;
+  grid-template-columns: auto auto auto auto auto;
+}
+
+#game.intermedio {
+  width: 80%;
+  grid-template-columns: auto auto auto auto;
+}
+
+#btPlay {
+  border: 1px solid #5e5858;
+  background-color: #5eac52;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4);
+  justify-self: end;
+}
+#btPlay:hover {
+  background: rgba(0, 0, 0, 0.1);
+  border: 1px solid #751d1d;
+  background: var(--globalColor);
+}
+
+#btPlay:disabled,
+#btPlay:disabled:hover {
+  background: rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  cursor: inherit;
+}
+
+#gameTime,
+#points {
+  background-color: grey;
+  color: white;
+  font-weight: bolder;
+  margin-left: 5px;
+  width: 45px;
+  text-align: right;
+  display: inline-block;
+}
+#points {
+  width: 65px;
+  text-align: left;
+  background-color: transparent;
+  color: var(--globalColor);
+}
+
+button:hover {
+  background: rgba(0, 0, 0, 0.1);
+  border: 2px solid grey;
+}
+
+#panel-control #top10 {
+  grid-column: 2 / -1;
+}
+
+.hide {
+  display: none;
+}
