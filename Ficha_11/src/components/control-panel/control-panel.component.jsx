@@ -1,13 +1,11 @@
 import React from "react";
 import "./control-panel.css";
 
-
-
 function ControlPanel(props) {
-
-  const { gameStarted, selectedLevel, onGameStart, onLevelChange, timer } = props;
+  const { gameStarted, selectedLevel, onGameStart, onLevelChange, timer } =
+    props;
   const gameStartedClass = gameStarted ? " gameStarted" : "";
-  
+
   return (
     <section id="panel-control">
       <h3 className="sr-only">Escolha do Nível</h3>
@@ -20,9 +18,7 @@ function ControlPanel(props) {
             onChange={onLevelChange}
             disabled={gameStarted}
           >
-            <option defaultValue value="0">
-              Seleccione...
-            </option>
+            <option value="0">Seleccione...</option>
             <option value="1">Básico (2x3)</option>
             <option value="2">Intermédio (3x4)</option>
             <option value="3">Avançado (4x5)</option>
@@ -60,6 +56,5 @@ function ControlPanel(props) {
     </section>
   );
 }
-
 
 export default ControlPanel;

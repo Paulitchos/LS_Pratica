@@ -1,9 +1,7 @@
-import "./assets/styles/App.css";
 import React from 'react';
 import { useState } from "react";
 import { useEffect } from "react";
-import { CARDS_LOGOS,TIMEOUTGAME } from "./constants/index.js";
-import { shuffleArray } from "./helpers/index.js";
+import "./assets/styles/App.css";
 
 import {
   ControlPanel,
@@ -12,15 +10,23 @@ import {
   GamePanel,
 } from "./components";
 
+import { CARDS_LOGOS, TIMEOUTGAME } from "./constants";
+import { shuffleArray } from "./helpers";
+
 let timerId = undefined;
 
 function App() {
-
   const [gameStarted, setGameStarted] = useState(false);
   const [selectedLevel, setSelectedLevel] = useState("0");
-  const [cards, setCards] = useState([]);
-   const [timer, setTimer] = useState(TIMEOUTGAME);
 
+  const [cards, setCards] = useState([]);
+
+  const [timer, setTimer] = useState(TIMEOUTGAME);
+
+
+  /**
+  * When the game starts
+  */
   const handleGameStart = () => {
     if (gameStarted) {
       console.log("Termina Jogo");
@@ -31,6 +37,10 @@ function App() {
     }
   };
 
+  /**
+   * When the user selects a new level,
+   * this callback function is executed
+   */
   const handleLevelChange = (event) => {
     const { value } = event.currentTarget;
     setSelectedLevel(value);
@@ -38,45 +48,47 @@ function App() {
     let numOfCards;
     switch (value) {
       // Level: Beginner
-      case "1":
+      case '1':
         numOfCards = 3;
         break;
       // Level: Intermediate
-      case "2":
+      case '2':
         numOfCards = 6;
         break;
       // Level: Advanced
-      case "3":
+      case '3':
         numOfCards = 10;
         break;
       default:
         numOfCards = 0;
         break;
     }
+
     const initialCards = shuffleArray(CARDS_LOGOS);
     const slicedInitialCards = initialCards.slice(0, numOfCards);
 
     // array com 2 imagens de cada tipo
     const doubledCardsObjects = [];
-
     slicedInitialCards.forEach((card, index) => {
       doubledCardsObjects.push({
         key: `${card}-${index}`,
         id: card,
-        name: card,
+        name: card
       });
-
       doubledCardsObjects.push({
         key: `${card}-${index}-clone`,
         id: `${card}-clone`,
-        name: card,
+        name: card
       });
     });
-
     const doubledShuffledCardsObjects = shuffleArray(doubledCardsObjects);
     setCards([...doubledShuffledCardsObjects]);
   };
 
+  /**
+     * When the component mounts,
+     * we set an interval for the timer.
+*/
   useEffect(() => {
     if (gameStarted) {
       timerId = setInterval(() => {
@@ -88,6 +100,7 @@ function App() {
 
         if (nextTimer === 0) {
           setGameStarted(false);
+
         }
       }, 1000);
     } else if (timer !== TIMEOUTGAME) {
@@ -100,7 +113,6 @@ function App() {
       }
     };
   }, [gameStarted]);
-  
 
   return (
     <div id="container">
@@ -109,11 +121,12 @@ function App() {
         <ControlPanel
           gameStarted={gameStarted}
           onGameStart={handleGameStart}
-          onLevelChange={handleLevelChange}
           selectedLevel={selectedLevel}
+          onLevelChange={handleLevelChange}
           timer={timer}
         />
-        <GamePanel cards = {cards} selectedLevel={selectedLevel} />
+        <GamePanel cards={cards}
+          selectedLevel={selectedLevel} />
       </main>
       <Footer />
     </div>
@@ -121,3 +134,6 @@ function App() {
 }
 
 export default App;
+// Esta linha também poderia ser eliminada
+// e adefinição da funsão ser substituida 
+// export default function App() {
