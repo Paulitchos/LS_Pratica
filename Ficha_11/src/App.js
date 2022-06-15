@@ -18,10 +18,9 @@ let timerId = undefined;
 function App() {
   const [gameStarted, setGameStarted] = useState(false);
   const [selectedLevel, setSelectedLevel] = useState("0");
-
   const [cards, setCards] = useState([]);
-
   const [timer, setTimer] = useState(TIMEOUTGAME);
+  const[isGameOverModalOpen,setIsGameOverModalOpen] = useState(false);
 
 
   /**
@@ -125,8 +124,12 @@ function App() {
           onLevelChange={handleLevelChange}
           timer={timer}
         />
-        <GamePanel cards={cards}
-          selectedLevel={selectedLevel} />
+        <GamePanel
+          cards={cards}
+          selectedLevel={selectedLevel}
+          gameStarted={gameStarted}
+          onGameStart={handleGameStart}
+        />
       </main>
       <Footer />
     </div>

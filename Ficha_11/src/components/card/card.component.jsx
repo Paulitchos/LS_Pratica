@@ -6,8 +6,16 @@ import {
 } from "../../constants";
 
 function Card({ card }) {
+
+  const handleClickCaptureCard = (event) => {
+    if (flipped) {
+      event.stopPropagation();
+    }
+  };
+ 
+
   return (
-    <div className="card flipped" data-logo={card.name}>
+    <div className={`card${flippedClass} ${matchedClass}`} data-logo={card.name} onClick ={() => {onClickCard(card)}} onClickCapture={handleClickCaptureCard}>
       <img
         src={PLACEHOLDER_CARDBACK_PATH}
         className="card-back"
